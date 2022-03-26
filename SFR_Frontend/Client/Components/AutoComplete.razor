@@ -1,0 +1,33 @@
+﻿@namespace SFR_Frontend.Client.Components
+
+<label for="exampleDataList" class="form-label">Austrian Capital City</label>
+<input class="form-control" list="datalistOptions" id="exampleDataList" @bind="searchTerm" @oninput="OnInput" placeholder="Type to search...">
+<datalist id="datalistOptions">
+    @foreach(string item in AutoCompleteItems)
+    {
+        <option value="@item" />
+    }
+</datalist>
+
+@code {
+    private string searchTerm = string.Empty;
+
+    [Parameter]
+    public List<string> AutoCompleteItems { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<string> OnSearchTermChanged { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private Task OnInput(ChangeEventArgs e)
+    {
+        string? searchTerm = e?.Value?.ToString();
+
+        Console.WriteLine("OnChanged");
+        return OnSearchTermChanged.InvokeAsync(searchTerm) ?? Task.CompletedTask;
+     }
+}

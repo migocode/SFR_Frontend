@@ -1,0 +1,38 @@
+﻿@page "/"
+
+@inject IHttpClientFactory clientFactory
+
+<PageTitle>Auto Complete</PageTitle>
+
+<AutoComplete OnSearchTermChanged="OnSearchTermChanged" AutoCompleteItems="cities"/>
+
+@code {
+    private HttpClient? client;
+    private List<string> cities;
+
+    public Index()
+    {
+        cities = new();
+    }
+
+    protected override void OnInitialized()
+    {
+        client = clientFactory.CreateClient("Default");
+
+        base.OnInitialized();
+    }
+
+    async Task OnSearchTermChanged(string searchTerm)
+    {
+        if (client is not null 
+            && string.IsNullOrWhiteSpace(searchTerm) == false)
+        {
+            List<string>? result = await client.GetFromJsonAsync<List<string>>($"Cities/Lookup?searchTerm={searchTerm}");
+
+            if(result is not null)
+            {
+                cities = result;
+            }
+        }
+    }
+}
