@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Client\SFR_Frontend.Client.csproj" />
-    <ProjectReference Include="..\Shared\SFR_Frontend.Shared.csproj" />
   </ItemGroup>
 
 

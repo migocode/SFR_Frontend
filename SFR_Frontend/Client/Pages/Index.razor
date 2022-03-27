@@ -4,7 +4,7 @@
 
 <PageTitle>Auto Complete</PageTitle>
 
-<AutoComplete OnSearchTermChanged="OnSearchTermChanged" AutoCompleteItems="cities"/>
+<AutoComplete OnSearchTermChanged="OnSearchTermChanged" OnFocusLost="OnFocusLost" AutoCompleteItems="cities"/>
 
 @code {
     private HttpClient? client;
@@ -22,7 +22,7 @@
         base.OnInitialized();
     }
 
-    async Task OnSearchTermChanged(string searchTerm)
+    private async Task OnSearchTermChanged(string searchTerm)
     {
         if (client is not null 
             && string.IsNullOrWhiteSpace(searchTerm) == false)
@@ -34,5 +34,11 @@
                 cities = result;
             }
         }
+    }
+
+    private Task OnFocusLost(string input)
+    {
+        Console.WriteLine($"Input was '{input}'");
+        return Task.CompletedTask;
     }
 }

@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
 
+string corsPolicyName = "Default";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicyName,
+        builder =>
+        {
+            builder.AllowAnyOrigin();
+        });
+});
 
 var app = builder.Build();
 
@@ -33,6 +44,8 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors(corsPolicyName);
 
 
 app.MapRazorPages();
