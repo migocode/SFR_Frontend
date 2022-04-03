@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import './AutoCompleteWebComponent.js';
 
 export class AutoComplete extends Component {
     constructor(props) {
@@ -13,6 +14,17 @@ export class AutoComplete extends Component {
 
         this.handleOnInput = this.handleOnInput.bind(this);
         this.handleLostFocus = this.handleLostFocus.bind(this);
+
+        this.ref = React.createRef();
+    }
+
+    componentDidMount() {
+        const current = this.ref.current;
+
+        current.addEventListener('onTextChanged', customEvent =>
+            this.handleOnInput(customEvent));
+        current.addEventListener('onFocusOut', customEvent =>
+            this.handleLostFocus(customEvent));
     }
 
     static getDerivedStateFromProps(props, current_state) {
@@ -41,27 +53,16 @@ export class AutoComplete extends Component {
         }
 
         return (
-            <div>
-                <label htmlFor="exampleDataList" className="form-label">Auto Complete Component</label>
-                <input className="form-control" list="datalistOptions"
-                    value={this.state.searchTerm}
-                    id="exampleDataList"
-                    onInput={this.handleOnInput}
-                    onBlur={this.handleLostFocus}
-                    placeholder="Type to search..." />
-                <datalist id="datalistOptions">
-                    {this.state.autoCompleteItems?.map(item => <option key={ item } value={ item } />) }
-                </datalist>
-            </div>
+            <auto-complete-wc ref={this.ref} options={JSON.stringify(this.state.autoCompleteItems)}></auto-complete-wc>
         );
     }
 
-    handleOnInput(eventArgs) {
-        this.setState({ searchTerm: eventArgs.target.value });
-        this.state.onSearchTermChanged(eventArgs.target.value);
+    handleOnInput(event) {
+        this.setState({ searchTerm: event.detail });
+        this.state.onSearchTermChanged(event.detail);
     }
 
-    handleLostFocus(eventArgs) {
-        this.state.onFocusLost(this.state.searchTerm);
+    handleLostFocus(event) {
+        this.state.onFocusLost(event.detail);
     }
 }

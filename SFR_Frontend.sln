@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "sfr_frontend.vueclient", "sfr_frontend.vueclient\sfr_frontend.vueclient.njsproj", "{D5A817B8-7AC0-4FE1-B69B-66E9F128441C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{731E0F16-F09F-42CA-842C-46D3F072EE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{731E0F16-F09F-42CA-842C-46D3F072EE24}.Release|Any CPU.Build.0 = Release|Any CPU
 		{731E0F16-F09F-42CA-842C-46D3F072EE24}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D5A817B8-7AC0-4FE1-B69B-66E9F128441C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A817B8-7AC0-4FE1-B69B-66E9F128441C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A817B8-7AC0-4FE1-B69B-66E9F128441C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A817B8-7AC0-4FE1-B69B-66E9F128441C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

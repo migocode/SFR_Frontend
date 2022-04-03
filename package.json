@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^0.26.1",
+    "use-custom-element": "^1.0.5"
+  }
+}
